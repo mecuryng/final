@@ -20,7 +20,7 @@ st.page_icon="🏂"
 alt.themes.enable("dark")
 
 
-os.chdir(r"C:\Users\Chukwuemeka\Dropbox\MTech Thesis\Work\Diabetes-analysis")
+#os.chdir(r"C:\Users\Chukwuemeka\Dropbox\MTech Thesis\Work\Diabetes-analysis")
 final_data= pd.read_csv("data_with_regions.csv",encoding="ISO-8859-1")
 final_data['Number'] = pd.to_numeric(final_data['Number'])
 
