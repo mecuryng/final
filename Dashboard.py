@@ -7,7 +7,7 @@ import streamlit as st
 import altair as alt
 import os
 import geopandas as gpd
-# from mplcursors import cursor
+#from mplcursors import cursor
 import warnings
 warnings.filterwarnings('ignore')
 # from pandasai import Agent
@@ -19,11 +19,12 @@ st.markdown('<style> div.block-container{padding-top:2rem;}<style>',unsafe_allow
 st.page_icon="🏂"
 alt.themes.enable("dark")
 
-
-#os.chdir(r"C:\Users\Chukwuemeka\Dropbox\MTech Thesis\Work\Diabetes-analysis")
-final_data= pd.read_csv("data_with_regions.csv",encoding="ISO-8859-1")
-final_data['Number'] = pd.to_numeric(final_data['Number'])
-
+@st.cache_data
+def get_data():
+    #os.chdir(r"C:\Users\Chukwuemeka\Dropbox\MTech Thesis\Work\Diabetes-analysis")
+    final_data= pd.read_csv("data_with_regions.csv",encoding="ISO-8859-1")
+    final_data['Number'] = pd.to_numeric(final_data['Number'])
+    return final_data
 #  
 # # Define the region mapping as a dictionary
 # region_mapping = {
@@ -248,7 +249,7 @@ final_data['Number'] = pd.to_numeric(final_data['Number'])
 # ccgdata.to_csv('data_with_regions.csv', index=False)
 
 #  
-
+final_data=get_data()
 st.sidebar.header("Filter By:")
 year = st.sidebar.multiselect("Year", final_data["Year"].unique())
 if year:
