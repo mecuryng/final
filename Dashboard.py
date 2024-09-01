@@ -7,7 +7,7 @@ import streamlit as st
 import altair as alt
 import os
 import geopandas as gpd
-from mplcursors import cursor
+# from mplcursors import cursor
 import warnings
 warnings.filterwarnings('ignore')
 # from pandasai import Agent
