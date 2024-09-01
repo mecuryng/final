@@ -308,27 +308,51 @@ with met4:
     st.metric(f"Prevalence", round( top_area_diabetes['Prevalence'], 2), "%")
 
 
-# Group data by Year and prevalence
-diabetes_prevalence = (
-    filtered_df.groupby("Year")["Prevalence"]
-    .agg('mean')
-    .round(4)
-    .reset_index()
-)
 
-prevalence_data = diabetes_prevalence
 
-# Create the line chart using Plotly
-fig = px.line(
-    prevalence_data, x="Year", y="Prevalence", title="Diabetes Prevalence by Year",
-    hover_data=["Year", "Prevalence"],
-    
-)
-fig.update_layout(xaxis_title="Year", yaxis_title="Prevalence (%)") 
+if region:
+    # Group data by Year and prevalence
+    diabetes_prevalence = (
+        filtered_df.groupby(["Year","Area"])["Prevalence"]
+        .agg('mean')
+        .round(4)
+        .reset_index()
+    )
 
-# Display the chart using Streamlit
-st.title("Diabetes Prevalence by Year")
-st.plotly_chart(fig)
+    prevalence_data = diabetes_prevalence
+    # Create the line chart using Plotly
+    fig = px.line(
+        prevalence_data, x="Year", y="Prevalence", title="Diabetes Prevalence by Year",
+        hover_data=["Area","Year", "Prevalence"],color="Area"
+        
+    )
+    fig.update_layout(xaxis_title="Year", yaxis_title="Prevalence (%)") 
+
+    # Display the chart using Streamlit
+    st.title("Diabetes Prevalence by Year")
+    st.plotly_chart(fig)
+else:
+        # Group data by Year and prevalence
+    diabetes_prevalence = (
+        filtered_df.groupby(["Year","Region"])["Prevalence"]
+        .agg('mean')
+        .round(4)
+        .reset_index()
+    )
+
+    prevalence_data = diabetes_prevalence
+    # Create the line chart using Plotly
+    fig = px.line(
+        prevalence_data, x="Year", y="Prevalence", title="Diabetes Prevalence by Year",
+        hover_data=["Region","Year", "Prevalence"],color="Region"
+        
+    )
+    fig.update_layout(xaxis_title="Year", yaxis_title="Prevalence (%)") 
+
+    # Display the chart using Streamlit
+    st.title("Diabetes Prevalence by Year")
+    st.plotly_chart(fig)
+
 
 m,n = st.columns(2)
 # Heatmap visualizing prevalence rates across different regions
