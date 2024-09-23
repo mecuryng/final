@@ -11,7 +11,7 @@ import geopandas as gpd
 import warnings
 warnings.filterwarnings('ignore')
 # from pandasai import Agent
-os.environ["PANDASAI_API_KEY"] = "$2a$10$V2z5aB2uQQdzDHowfARFT.mxobfX98g1kciBpp.cVTBim/PDwCesS"
+os.environ["PANDASAI_API_KEY"] = ""
 
 st.set_page_config(page_title="Diabetes Analysis Dashboard", page_icon=":bar_chart:", layout="wide")
 st.title(":bar_chart: Diabetes Analysis Dashboard")
@@ -21,7 +21,7 @@ alt.themes.enable("dark")
 
 @st.cache_data
 def get_data():
-    #os.chdir(r"C:\Users\Chukwuemeka\Dropbox\MTech Thesis\Work\Diabetes-analysis")
+
     final_data= pd.read_csv("data_with_regions.csv",encoding="ISO-8859-1")
     final_data['Number'] = pd.to_numeric(final_data['Number'])
     return final_data
