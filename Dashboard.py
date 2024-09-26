@@ -399,8 +399,8 @@ else:
 # Load the shapefile containing region boundaries
 #@st.cache_data
 def get_merged():
-    #shapefile_path = 'ccg_shp/Clinical_Commissioning_Groups_July_2015_FEB_in_England.shp'
-    #regions_gdf_shp = gpd.read_file(shapefile_path)
+    shapefile_path = 'ccg_shp/Clinical_Commissioning_Groups_July_2015_FEB_in_England.shp'
+    regions_gdf_shp = gpd.read_file(shapefile_path)
     regions_gdf= pd.read_csv("CCG.csv",encoding="ISO-8859-1")
     regions_gdf1= pd.read_csv("CCG2.csv",encoding="ISO-8859-1")
 
@@ -414,9 +414,9 @@ def get_merged():
 
     df_dropped=df_dropped.rename(columns={"LONG": "LON","Shape_Length_y":"Shape_Length","Shape_Area_y":"Shape_Area","GlobalID_y":"GlobalID"}, errors="raise")
 
-    #regions_gdf_shp=regions_gdf_shp.rename(columns={"ccg15cd":"Area_code","ccg15nm": "Area"})
+    regions_gdf_shp=regions_gdf_shp.rename(columns={"ccg15cd":"Area_code","ccg15nm": "Area"})
     #st.write(merged_data.isnull().dropna)
-    #df_dropped= pd.merge(df_dropped,regions_gdf_shp, on =['Area_code','Area','GlobalID'], how='left')
+    df_dropped= pd.merge(df_dropped,regions_gdf_shp, on =['Area_code','Area','GlobalID'], how='left')
     
     #st.write(df_dropped.head(5))
     #df_dropped.to_csv('merged_data_shp.csv', index=False)
