@@ -417,6 +417,7 @@ def get_merged():
     regions_gdf_shp=regions_gdf_shp.rename(columns={"ccg15cd":"Area_code","ccg15nm": "Area"})
     #st.write(merged_data.isnull().dropna)
     df_dropped= pd.merge(df_dropped,regions_gdf_shp, on =['Area_code','Area','GlobalID'], how='left')
+    
     #st.write(df_dropped.head(5))
     #df_dropped.to_csv('merged_data_shp.csv', index=False)
     #st.write(df_dropped.columns)
